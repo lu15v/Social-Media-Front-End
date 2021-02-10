@@ -2,20 +2,17 @@ import gql from 'graphql-tag';
 import React, {useState} from 'react'
 import {useMutation} from '@apollo/react-hooks';
 import  { Button, Form } from 'semantic-ui-react';
-
+import {useForm} from '../util/hooks';
 
 const  Login = (props) =>{
     const [errors, setErrors] = useState({});
-    const [values, setValues] = useState({
+
+    const {onChange, onSubmit, values} = useForm(loginUser, {
         username: '',
         password: ''
-    })
+    });
 
-    const onChange = (event) =>{
-        setValues({...values, [event.target.name] : event.target.value})
-    }
-
-    const [adduser, {loading}] = useMutation(LOGIN_USER, {
+    const [login, {loading}] = useMutation(LOGIN_USER, {
         update(_, result){
             console.log(result);
             props.history.push('/');
@@ -27,12 +24,9 @@ const  Login = (props) =>{
         variables:values
     })
 
-    const onSubmit =  async (event) =>{
-        event.preventDefault();
-        
-        adduser();  
+    function loginUser(){
+        login();
     }
-
 
     return (
         <div className="form-container">

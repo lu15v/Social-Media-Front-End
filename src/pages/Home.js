@@ -1,6 +1,6 @@
 import React from 'react'
 import {useQuery} from '@apollo/react-hooks';
-import { Grid, Image } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 import gql from 'graphql-tag';
 
 import PostCard from '../components/PostCard';

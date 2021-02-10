@@ -2,39 +2,32 @@ import gql from 'graphql-tag';
 import React, {useState} from 'react'
 import {useMutation} from '@apollo/react-hooks';
 import  { Button, Form } from 'semantic-ui-react';
-
+import {useForm} from '../util/hooks';
 
 const  Register = (props) =>{
     const [errors, setErrors] = useState({});
-    const [values, setValues] = useState({
+    
+    const {onChange, onSubmit, values} = useForm(registerUser, {
         username: '',
         password: '', 
         confirmPassword: '',
         email: ''
-    })
+    });
 
-    const onChange = (event) =>{
-        setValues({...values, [event.target.name] : event.target.value})
-    }
 
     const [adduser, {loading}] = useMutation(REGISTER_USER, {
         update(_, result){
-            console.log(result);
             props.history.push('/');
         },
         onError(err){
-            console.log(err.graphQLErrors[0].extensions.exception.errors)
             setErrors(err.graphQLErrors[0].extensions.exception.errors);
         },
         variables:values
     })
 
-    const onSubmit =  async (event) =>{
-        event.preventDefault();
-        
-        adduser();  
+    function registerUser() {
+        adduser();
     }
-
 
     return (
         <div className="form-container">
