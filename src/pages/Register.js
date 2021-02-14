@@ -80,15 +80,17 @@ const  Register = (props) =>{
                         Register
                     </Button>
             </Form>
-            {/* {Object.keys(errors).length > 0 && (
-            <div className="ui error message">
-                <ul className="list">
-                    {Object.values(errors).map(value=>(
-                        <li key={value}>{value}</li>
-                    ))}
-                </ul>
-            </div>
-            )} */}
+            {
+               Object.keys(errors).filter(key => key === 'general').length > 0 && (
+                   <div className="ui error message">
+                       <ul className="list">
+                            {Object.values(errors).map(error =>(
+                                <li key={error}>{error}</li>
+                            ))}
+                       </ul>
+                    </div>
+               )
+           }
         </div>
     )
 }

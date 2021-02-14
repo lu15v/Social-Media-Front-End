@@ -58,6 +58,17 @@ const  Login = (props) =>{
                         Login
                     </Button>
             </Form>
+           {
+               Object.keys(errors).filter(key => key === 'general').length > 0 && (
+                   <div className="ui error message">
+                       <ul className="list">
+                            {Object.values(errors).map(error =>(
+                                <li key={error}>{error}</li>
+                            ))}
+                       </ul>
+                    </div>
+               )
+           }
         </div>
     )
 }
