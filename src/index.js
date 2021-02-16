@@ -4,13 +4,23 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import {ApolloClient, InMemoryCache, createHttpLink, ApolloProvider} from '@apollo/client';
+import {setContext} from 'apollo-link-context';
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:5000'
 });
 
+const authLink = setContext(()=>{
+  const token = localStorage.getItem('token');
+  return{
+    headers:{
+      authorization: token ? `Bearer ${token}` : ''
+    }
+  }
+})
+
 const apolloClient = new ApolloClient({
-  link: httpLink,
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache()
 });
 
