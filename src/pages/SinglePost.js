@@ -4,13 +4,16 @@ import {useQuery} from '@apollo/react-hooks';
 import { Button, Card, Grid, Icon, Image, Label} from 'semantic-ui-react';
 import moment from 'moment';
 
+import DeleteButton from '../components/DeleteButton';
+import LikeButton from '../components/LikeButton';
 
 import {AuthContext} from '../context/auth'
+
 const SinglePost = (props) =>{
     const postId = props.match.params.postId;
     const {user} = useContext(AuthContext);
 
-    const {loading, data: {getPost}} = useQuery(FETCH_POST_QUERY, {
+    const {loading, data} = useQuery(FETCH_POST_QUERY, {
         variables:{
             postId
         },
@@ -19,13 +22,17 @@ const SinglePost = (props) =>{
         }
     })
 
+    function deletePostCallback(){
+        props.history.push('/');
+    }
+
 
     let postMarkup;
 
     if(loading){
         postMarkup = <p>Loading post...</p>
     }else{
-        const { id, body, createdAt, username, comments, likes, likeCount, commentCount} = getPost;
+        const { id, body, createdAt, username, comments, likes, likeCount, commentCount} = data.getPost;
 
         postMarkup = (
             <Grid>
@@ -44,7 +51,7 @@ const SinglePost = (props) =>{
                             </Card.Content>
                             <hr/>
                             <Card.Content extra>
-                                <likeButton user={user} post={{id, likeCount, likes}}/>
+                                <LikeButton user={user} post={{id, likeCount, likes}}/>
                                 <Button
                                     as="div"
                                     labelPosition="right"
@@ -56,6 +63,11 @@ const SinglePost = (props) =>{
                                             {commentCount}
                                         </Label>
                                     </Button>
+                                    {
+                                        user && user.username === username &&(
+                                            <DeleteButton postId ={id} callback={deletePostCallback}/>
+                                        )
+                                    }
                             </Card.Content>
                         </Grid.Column>
                     </Grid.Row>
@@ -63,9 +75,7 @@ const SinglePost = (props) =>{
         )
     }
 
-    return(
-        postMarkup
-    )
+    return postMarkup
 }
 
 

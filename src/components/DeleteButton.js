@@ -3,12 +3,13 @@ import gql from 'graphql-tag';
 import React, {useState} from 'react';
 import {Button, Icon, Confirm} from 'semantic-ui-react';
 
-const DeleteButton = ({postId}) =>{
+const DeleteButton = ({postId, callback}) =>{
     const [confirmOpen, setConfirmOpen] = useState(false);
 
-    const [deletePost, {loading}] = useMutation(DELETE_POST_MUTATION, {
+    const [deletePost] = useMutation(DELETE_POST_MUTATION, {
         update(){
             setConfirmOpen(false);
+            callback ?? callback();
         },
         variables: {
             postId: postId
