@@ -19,8 +19,6 @@ const PostForm = () => {
     },
     onError(error) {
       console.log(error.graphQLErrors[0].message);
-      console.log("dfdfd");
-      console.log(error);
     },
     refetchQueries: [
       {
