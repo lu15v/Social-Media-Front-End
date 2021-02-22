@@ -33,7 +33,7 @@ const SinglePost = (props) =>{
         postMarkup = <p>Loading post...</p>
     }else{
         const { id, body, createdAt, username, comments, likes, likeCount, commentCount} = data.getPost;
-
+        
         postMarkup = (
             <Grid>
                     <Grid.Row>
@@ -86,6 +86,9 @@ const FETCH_POST_QUERY  = gql`
             commentCount
             comments{
                 id username createdAt
+            }
+            likes{
+                id username
             }
         }
     }

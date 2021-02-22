@@ -7,8 +7,9 @@ import { Icon, Label, Button } from "semantic-ui-react";
 const LikeButton = (props) => {
   const {
     user,
-    post: { id, likes, likeCount },
+    post: { id, likes, likeCount }
   } = props;
+  
   const [liked, setLiked] = useState(false);
 
   useEffect(() => {
