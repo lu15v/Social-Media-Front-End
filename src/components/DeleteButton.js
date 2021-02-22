@@ -9,7 +9,7 @@ const DeleteButton = ({postId, callback}) =>{
     const [deletePost] = useMutation(DELETE_POST_MUTATION, {
         update(){
             setConfirmOpen(false);
-            callback ?? callback();
+            callback !== undefined ?? callback();
         },
         variables: {
             postId: postId
