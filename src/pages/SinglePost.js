@@ -57,17 +57,18 @@ const SinglePost = (props) => {
       body,
       createdAt,
       username,
+      avatar,
       comments,
       likes,
       likeCount,
       commentCount,
     } = data.getPost;
-
+    
     postMarkup = (
       <Grid>
         <Grid.Row>
           <Grid.Column width={2}>
-            <Avatar size="small" float="right" content={{username, createdAt}}/>
+            <Avatar size="small" float="right" content={{createdAt, username, avatar}}/>
           </Grid.Column>
           <Grid.Column width={10}>
             <Card.Content>
@@ -177,6 +178,7 @@ const FETCH_POST_QUERY = gql`
       body
       createdAt
       username
+      avatar
       likeCount
       commentCount
       comments {

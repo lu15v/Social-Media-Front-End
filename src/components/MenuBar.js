@@ -6,7 +6,7 @@ import Avatar from './Avatar';
 
 const MenuBar = () => {
     const {user, logout} = useContext(AuthContext);
-    console.log(user)
+
     const avatar = user && user.avatar;
     const username = user && user.username;
     const pathName = window.location.pathname;

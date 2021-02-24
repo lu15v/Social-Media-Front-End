@@ -2,8 +2,8 @@ import React from 'react';
 import {Image, Popup } from "semantic-ui-react";
 import moment from "moment";
 
-const Avatar = ({stylePicture, size, float, content:{createdAt, username, avatar}}) => {
-    console.log(createdAt, username, avatar)
+const Avatar = ({size, float, content:{createdAt, username, avatar}}) => {
+    
     function popUp() {
        return  createdAt ? (
             <Popup

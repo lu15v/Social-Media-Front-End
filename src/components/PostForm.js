@@ -14,7 +14,6 @@ const PostForm = () => {
   const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
     variables: values,
     update(_, result) {
-      console.log(result);
       values.body = "";
     },
     onError(error) {

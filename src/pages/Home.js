@@ -49,6 +49,7 @@ const FETCH_POSTS = gql`
       body
       createdAt
       username
+      avatar
       likeCount
       likes {
         username

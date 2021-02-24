@@ -9,7 +9,7 @@ import Avatar from './Avatar.js';
 import { AuthContext } from "../context/auth";
 
 const PostCard = ({
-  post: { body, createdAt, id, username, likeCount, commentCount, likes },
+  post: { body, createdAt, id, username, avatar, likeCount, commentCount, likes },
 }) => {
   //const {body, createdAt, id, username, likeCount, commentCount, likes} = props.post;
   const { user } = useContext(AuthContext);
@@ -17,7 +17,7 @@ const PostCard = ({
   return (
     <Card fluid>
       <Card.Content>
-        <Avatar float="right" size="mini" content={{username, createdAt}}/>
+        <Avatar float="right" size="mini" content={{createdAt, username, avatar}}/>
         <Card.Header>{username}</Card.Header>
         <Card.Meta as={Link} to={`/posts/${id}`}>
           {moment(new Date(parseInt(createdAt))).fromNow(true)}
