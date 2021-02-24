@@ -2,10 +2,13 @@ import React, { useContext, useState } from 'react'
 import { Menu } from 'semantic-ui-react'
 import {Link} from 'react-router-dom';
 import { AuthContext } from '../context/auth';
+import Avatar from './Avatar';
 
 const MenuBar = () => {
     const {user, logout} = useContext(AuthContext);
-
+    console.log(user)
+    const avatar = user && user.avatar;
+    const username = user && user.username;
     const pathName = window.location.pathname;
     const path = pathName === "/" ? "home" : pathName.substr(1);
     
@@ -15,6 +18,7 @@ const MenuBar = () => {
 
     const menuBar = user ? (
       <Menu pointing secondary size="massive" color="teal">
+        <Avatar float="right" size="mini" content={{username, avatar}}/>
           <Menu.Item
             name={user.username}
             active

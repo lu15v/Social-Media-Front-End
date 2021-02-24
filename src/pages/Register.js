@@ -185,6 +185,7 @@ const REGISTER_USER = gql`
       email
       token
       username
+      avatar
     }
   }
 `;

@@ -85,6 +85,7 @@ const LOGIN_USER = gql`
             email
             token
             username
+            avatar
         }
     }
 `

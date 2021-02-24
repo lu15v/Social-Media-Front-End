@@ -2,24 +2,33 @@ import React from 'react';
 import {Image, Popup } from "semantic-ui-react";
 import moment from "moment";
 
-const Avatar = ({size, float, content:{createdAt, username}}) => {
-
-
-    return(
-        <Popup
-          inverted
-          content={`User since ${moment(new Date(parseInt(createdAt))).format('yyyy')}`}
-          key={username}
-          header={username}
-          trigger={
+const Avatar = ({stylePicture, size, float, content:{createdAt, username, avatar}}) => {
+    console.log(createdAt, username, avatar)
+    function popUp() {
+       return  createdAt ? (
+            <Popup
+            inverted
+            content={`User since ${moment(new Date(parseInt(createdAt))).format('yyyy')}`}
+            key={username}
+            header={username}
+            trigger={
+              <Image
+                floated={float}
+                size={size}
+                src={avatar}
+              />
+            }
+          />
+        ) : (
             <Image
-              floated={float}
-              size={size}
-              src="https://react.semantic-ui.com/images/avatar/large/molly.png"
-            />
-          }
-        />
-    )
+                floated={float}
+                size={size}
+                src={avatar}
+              />
+        )
+    }
+
+    return popUp();
 }
 
 export default Avatar;
