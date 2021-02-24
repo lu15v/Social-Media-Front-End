@@ -5,10 +5,10 @@ export const useForm = (callback, initState) =>{
 
     const [values, setValues] = useState(initState);
 
-    const onChange = (event) =>{
-        setValues({...values, [event.target.name] : event.target.value})
+    const onChange = (_, {name, value}) =>{
+        setValues({...values, [name] : value})
     }
-
+    
     const onSubmit = event =>{
         event.preventDefault();
         callback();
