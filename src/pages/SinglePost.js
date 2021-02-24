@@ -131,19 +131,23 @@ const SinglePost = (props) => {
                 </Card.Content>
               </Card>
             )}
-            {comments.map((comment) => (
-              <Card fluid key={comment.id}>
+            {comments.map(({id, username, avatar, createdAt,body}) => (
+
+              <Card fluid key={id}>
                 <Card.Content>
-                  {user && user.username === comment.username && (
-                    <DeleteButton postId={id} commentId={comment.id} />
+                  {user && user.username === username && (
+                    <DeleteButton postId={id} commentId={id} />
                   )}
-                  <Card.Header>{comment.username}</Card.Header>
+                  <Card.Header>
+                    <Avatar size="mini" float="left" content={{username, avatar}}/>
+                      {username}
+                  </Card.Header>
                   <Card.Meta>
-                    {moment(new Date(parseInt(comment.createdAt))).fromNow(
+                    {moment(new Date(parseInt(createdAt))).fromNow(
                       true
                     )}
                   </Card.Meta>
-                  <Card.Description>{comment.body}</Card.Description>
+                  <Card.Description>{body}</Card.Description>
                 </Card.Content>
               </Card>
             ))}
@@ -184,6 +188,7 @@ const FETCH_POST_QUERY = gql`
       comments {
         id
         username
+        avatar
         createdAt
         body
       }
