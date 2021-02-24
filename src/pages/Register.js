@@ -144,8 +144,9 @@ const Register = (props) => {
           selection
           options={avatarOptions}
           as={Form.Field}
-          onChange={onChangeAvatar}
           value={avatar}
+          error={errors.avatar}
+          onChange={onChangeAvatar}
         />
         <Button type="submit" primary>
           Register
