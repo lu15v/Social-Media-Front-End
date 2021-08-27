@@ -7,7 +7,7 @@ import {ApolloClient, InMemoryCache, createHttpLink, ApolloProvider} from '@apol
 import {setContext} from 'apollo-link-context';
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:5000'
+  uri: 'https://social-media-back.herokuapp.com/'
 });
 
 const authLink = setContext(()=>{
